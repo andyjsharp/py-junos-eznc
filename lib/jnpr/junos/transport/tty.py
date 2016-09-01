@@ -119,8 +119,9 @@ class Terminal(object):
         cleanly logout of the TTY
         """
         logger.info('logout: logging out.....')
-        self.nc.close()
-        self._logout_state_machine()
+        self._tty_close()
+        #self.nc.close()
+        #self._logout_state_machine()
         return True
 
         # ---------------------------------------------------------------------
@@ -215,8 +216,8 @@ class Terminal(object):
                 self.write('<close-session/>')  # @@@ this is a hack
                 # if console connection have a banner or warning
                 # comment-out line above and uncoment lines bellow ... better hack
-                # sleep(5)
-                # self.write('\n')
+                sleep(5)
+                self.write('\n')
 
         def _ev_shell():
             if self.state == self._ST_INIT:
